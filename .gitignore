@@ -1,0 +1,16 @@
+# Build and distribution files
+build/
+dist/
+*.war
+*.class
+
+# NetBeans user private configuration
+nbproject/private/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+*.iml
+.vscode/

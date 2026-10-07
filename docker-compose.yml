@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: autocare_db
+      MYSQL_USER: autocare_user
+      MYSQL_PASSWORD: AutoCare@123
+      MYSQL_ROOT_PASSWORD: RootAutoCare@123
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./database.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: autocare_db
+      DB_USER: autocare_user
+      DB_PASSWORD: AutoCare@123
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
