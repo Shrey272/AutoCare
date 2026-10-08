@@ -27,14 +27,14 @@ public class DBConnection {
     public static Connection getConnection() throws SQLException {
         String dbUrl = System.getenv("DB_URL");
         if (dbUrl == null || dbUrl.trim().isEmpty()) {
-            String host = System.getenv("DB_HOST") != null ? System.getenv("DB_HOST") : DEFAULT_HOST;
-            String port = System.getenv("DB_PORT") != null ? System.getenv("DB_PORT") : DEFAULT_PORT;
-            String db = System.getenv("DB_NAME") != null ? System.getenv("DB_NAME") : DEFAULT_DB;
+            String host = System.getenv("MYSQLHOST") != null ? System.getenv("MYSQLHOST") : (System.getenv("DB_HOST") != null ? System.getenv("DB_HOST") : DEFAULT_HOST);
+            String port = System.getenv("MYSQLPORT") != null ? System.getenv("MYSQLPORT") : (System.getenv("DB_PORT") != null ? System.getenv("DB_PORT") : DEFAULT_PORT);
+            String db = System.getenv("MYSQLDATABASE") != null ? System.getenv("MYSQLDATABASE") : (System.getenv("DB_NAME") != null ? System.getenv("DB_NAME") : DEFAULT_DB);
             dbUrl = "jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
         }
 
-        String user = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : DEFAULT_USER;
-        String password = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : DEFAULT_PASSWORD;
+        String user = System.getenv("MYSQLUSER") != null ? System.getenv("MYSQLUSER") : (System.getenv("DB_USER") != null ? System.getenv("DB_USER") : DEFAULT_USER);
+        String password = System.getenv("MYSQLPASSWORD") != null ? System.getenv("MYSQLPASSWORD") : (System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : DEFAULT_PASSWORD);
 
         return DriverManager.getConnection(dbUrl, user, password);
     }
