@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.autocare.model.Bill" %>
+<%@ page import="model.Bill" %>
 <%
     String admin = (String) session.getAttribute("admin");
     if (admin == null) {
@@ -67,15 +67,15 @@
                         <td><%=b.getBillId()%></td>
                         <td><%=b.getBookingId()%></td>
                         <td><%=b.getCustomerName()%></td>
-                        <td><%=b.getVehicleReg()%></td>
+                        <td><%=b.getVehicleNumber()%></td>
                         <td><%=b.getServiceName()%></td>
-                        <td>&#8377; <%=b.getTotalAmount()%></td>
+                        <td>&#8377; <%=b.getAmount()%></td>
                         <td>
                             <span class="badge <%="Paid".equals(b.getPaymentStatus()) ? "badge-paid" : "badge-pending"%>">
                                 <%=b.getPaymentStatus() != null ? b.getPaymentStatus() : "Pending"%>
                             </span>
                         </td>
-                        <td><%=b.getBillDate() != null ? b.getBillDate().toString() : "-"%></td>
+                        <td><%=b.getPaymentDate() != null ? b.getPaymentDate() : "-"%></td>
                         <td>
                             <a href="<%=request.getContextPath()%>/BillServlet?action=delete&id=<%=b.getBillId()%>" 
                                class="btn btn-sm btn-danger" 
